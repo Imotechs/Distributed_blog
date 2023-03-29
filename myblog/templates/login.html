@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Challenge</title>
+    <link rel="stylesheet" href="{%static 'blog/css/index.css'%}">
+</head>
+<style>
+  .form .login-form {
+    display: block;
+  }
+.form .register-form {
+  display: none;
+}
+.error{
+  font-size: 8px;
+  color:red;
+}
+  </style>
+
+<body>
+
+    <div class="login-page">
+
+        <div class="form">
+          <form class="register-form" method = "post"action="{%url 'register'%}">
+            <input type="text" name = 'username'placeholder=" Email / Username"/>
+
+            <input type="password" name = 'password' placeholder="password"/>
+            <button type="submit">Register</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+          </form>
+
+
+          <form class="login-form" action="{%url 'login'%}" method="post">
+            <h1>Login</h1>
+            {%if msg %}
+            <div class="error">
+              {{msg}}
+            </div>
+            {%endif%}
+            <input type="text" name = 'username'placeholder=" Email / Username"/>
+            {%csrf_token%}
+            <input type="password" name = 'password' placeholder="password"/>
+            <button>login</button>
+            <p class="message">Not registered? <a href="{%url 'register'%}">Create an account</a></p>
+            <p class="message">Having issues with Login? <a href="{%url 'password_reset'%}">Reset Password</a></p>
+          </form>
+          
+        </div>
+      </div>
+
+      <!-- footer -->
+      
+<div class="footer">
+  <div class="row">
+    <div class="col-md-8">
+      <img src="https://www.distributed.com/wp-content/uploads/2021/10/distributed_logo_black.png" alt="">
+
+    </div>
+    <div class="col-md-3 " style="color: aliceblue;">
+      &copy; Distributed Django Blog Challenge
+    </div>
+  </div>
+</div>
+      <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+     <script>
+        $('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+        </script>
+</body>
+</html>

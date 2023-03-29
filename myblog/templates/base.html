@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed Django Blog Challenge</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="{%static 'blog/css/main.css'%}">
+</head>
+<style>
+    body {
+  background: #76b852; /* fallback for old browsers */
+  background: rgb(141,194,111);
+  background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+    ul li{
+        display: inline;
+        margin: 5px;
+    }
+    .searchbtn{
+        margin-left: -5px;
+    }
+.blink_me {
+  animation: blinker 1.0s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+    
+</style>
+<body>
+
+  <header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+      <div class="container">
+        <a class="navbar-brand mr-4" href=""><img src="https://www.distributed.com/wp-content/uploads/2021/10/distributed_logo_black.png"><b style="color:rgb(0, 166, 255)"> Blog</b> Challenge</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggle">
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link" href="/admin/">Dashboard</a>
+            <a class="nav-item nav-link" href="{%url 'home'%}">Home</a>
+            <a class="nav-item nav-link blink_me" href="{%url 'create_post'%}">Post+</a>
+          </div>
+          <!-- Navbar Right Side -->
+          <div class="navbar-nav" style="margin: 15px;">
+            {%if request.user.is_authenticated%}
+              {%else%}
+            <a class="nav-item nav-link" href="{%url 'login'%}">Login</a>
+            <a class="nav-item nav-link" href="{%url 'register'%}">Register</a>
+            {%endif%}
+          </div>
+          <form action="{%url 'search'%}" method="get">
+            <input type="search" name="item" placeholder="search Post" required/>
+
+            <button type="submit" class="searchbtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart-fill" viewBox="0 0 16 16">
+                <path d="M6.5 13a6.474 6.474 0 0 0 3.845-1.258h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.008 1.008 0 0 0-.115-.1A6.471 6.471 0 0 0 13 6.5 6.502 6.502 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13Zm0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
+              </svg>
+            </button>
+          </form>
+          {%if request.user.is_authenticated%}
+          <div class="navbar-nav mr-auto">
+
+          <a class="nav-item nav-link" href="{%url 'logout'%}">Logout</a>
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  {%block content%}
+
+  {%endblock content%}
+  <div class="footer">
+    <div class="row">
+      <div class="col-md-8">
+        <img src="https://www.distributed.com/wp-content/uploads/2021/10/distributed_logo_black.png" alt="">
+        
+        
+  
+      </div>
+      <div class="col-md-3 " style="color: aliceblue;">
+        &copy; Distributed Django Blog Challenge
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+  </body>
+  </html>

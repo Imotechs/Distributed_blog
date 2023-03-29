@@ -1,0 +1,51 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+<main role="main" class="container" style="margin-top: 8px;">
+  <div class="row">
+    
+      <div class="card-body content-section">
+        <div class="maincard">
+            <div class="col-md-8 post-img">
+                <img src="{{object.cover.url}}" class="img-fluid rounded-start" alt="img"> 
+            </div>
+            <h3 class="card-title text-center"><i><small class="text-muted">{{object.title}}</small></i></h3>
+            <p class="card-text"><i><small class="text-muted" style="color: orange;">{{object.content}}</small></i></p>
+            
+            <p class="card-title" style="font-size: smaller;">
+            {%if request.user == object.author or request.user.is_superuser %}
+            <div class="row">
+                <div class="col-md-4">
+                   <a href="{%url 'update_post' object.slug %}" style="float: right; text-decoration: none;">Edit</a>
+     
+                </div>
+                <div class="col-md-4">
+                  <a href="{%url 'delete' object.id %}" class="blink_me" style="float: right; color: brown;text-decoration: none;">Delete</a>
+       
+                </div>
+            </div>
+           
+          
+            {%endif%}
+            </hp>
+  
+            <p class="card-text" > 
+              
+             <small class="text-muted" style="color: orange;" style="font-size: smaller;float: left;">{{object.author}}&nbsp;</i>[{{object.created_on|date:'D,m,Y'}}]</small>
+              <small class="text-dark text-muted" style="font-size: smaller;float: right;">Last updated  on  {{object.updated_on|date:'D,m,Y'}}</small></p>  
+  <p></p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+
+</div>
+{%endblock content%}

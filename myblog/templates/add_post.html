@@ -1,0 +1,83 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+<style>
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: rgb(141,194,111);
+  background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+    ul li{
+        display: inline;
+        margin: 5px;
+    }
+   
+    button{
+      display: inline;
+    }
+    .register-form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #6b79c5;
+    width: 80%;
+    border: 0;
+    border-radius: 25px;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+  }
+  .blink_me {
+  animation: blinker 1.0s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 1;
+  }
+}
+</style>
+
+<main role="main" class="container" style="margin-top: 8px;">
+    <div class="card-body content-section">
+        <h3 class="card-title text-center"><i><small class="text-muted">Make New Post </small></i></h3>
+
+        <div class="maincard">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="post-img">
+                        <img src="{%static 'blog/img/blog2.png'%}" class="img-fluid rounded-start" alt="..."> 
+                    </div>
+                </div>
+                    <div class="col-md-6">
+                
+                       
+                        <form class="register-form" method = "post" enctype="multipart/form-data">
+                          {{form.as_p}}
+                          {%csrf_token%}
+                          <button type="submit">Submit</button>
+                            <!-- <input type="text" name = 'title'placeholder="Post Title" required/>
+                            <textarea  required name="" id="" cols="45" rows="5" placeholder="Post contents" name = 'contents'></textarea>
+                
+                            <input type="file" name = 'image' placeholder="add surporting Img"/>
+                            <button type="submit">Submit</button> -->
+                        </form>
+                        
+                    </div>  
+                    <p class="message" style="text-align: center;padding-top: 10px;">Make a post to my <a href="#">blog</a></p>
+
+            </div>
+        
+        </div>
+    </div>
+
+</main>
+{%endblock content%}
